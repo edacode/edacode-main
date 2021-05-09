@@ -1,1 +1,1 @@
-Package { #name : #'EDACodeMain' }
+Package { #name : #EDACodeMain }
