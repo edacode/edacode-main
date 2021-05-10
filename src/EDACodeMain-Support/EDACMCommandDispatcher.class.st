@@ -1,6 +1,8 @@
 Class {
 	#name : #EDACMCommandDispatcher,
 	#superclass : #EDACommandDispatcher,
+	#traits : 'EDATErrorHelper',
+	#classTraits : 'EDATErrorHelper classTrait',
 	#category : #'EDACodeMain-Support'
 }
 
@@ -10,6 +12,9 @@ EDACMCommandDispatcher class >> supports: aCommand [
 ]
 
 { #category : #'command handling' }
-EDACMCommandDispatcher >> handle: aCommand withErrorStrategy: aString [
-	self shouldBeImplemented
+EDACMCommandDispatcher >> handle: aCommand withErrorStrategy: aStrategy [
+	[ EDACMObjectProxy new handle: aCommand ]
+		on: Exception - Break
+		do:
+			[ :ex | self manageError: ex for: aCommand usingErrorStrategy: aStrategy ]
 ]

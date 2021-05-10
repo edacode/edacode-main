@@ -23,8 +23,9 @@ EDACMCreateMethodTest >> createMethod_example [
 						yourself)).
 	^ EDAExample
 		when: (self serializeCommand: createMethod)
-		then:
-			[ self assertMethod: createMethod methodName existsIn: createMethod target ]
+		then: [ :events :eventStore | self
+				assertMethod: createMethod methodName
+				existsIn: createMethod target ]
 ]
 
 { #category : #examples }
