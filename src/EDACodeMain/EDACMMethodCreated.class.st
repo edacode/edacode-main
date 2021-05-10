@@ -20,6 +20,14 @@ EDACMMethodCreated class >> withBuilder: aBuilder [
 		build: self
 ]
 
+{ #category : #comparing }
+EDACMMethodCreated >> = anInstance [
+	^ self class = anInstance class
+		and: [ self id = anInstance id
+				and:
+					[ self methodName = anInstance methodName and: [ self target = anInstance target and: [ self code = anInstance code and: [ self version = anInstance version ] ] ] ] ]
+]
+
 { #category : #accessing }
 EDACMMethodCreated >> code [
 	^ code
@@ -28,6 +36,14 @@ EDACMMethodCreated >> code [
 { #category : #accessing }
 EDACMMethodCreated >> code: anObject [
 	code := anObject
+]
+
+{ #category : #comparing }
+EDACMMethodCreated >> hash [
+	^ self class hash
+		bitXor: ( self id hash
+				bitXor: ( self methodName hash
+						bitXor: ( self target hash bitXor: ( self code hash bitXor: ( self version hash )))))
 ]
 
 { #category : #accessing }

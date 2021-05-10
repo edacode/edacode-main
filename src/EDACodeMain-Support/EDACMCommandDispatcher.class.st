@@ -13,8 +13,8 @@ EDACMCommandDispatcher class >> supports: aCommand [
 
 { #category : #'command handling' }
 EDACMCommandDispatcher >> handle: aCommand withErrorStrategy: aStrategy [
-	[ EDACMObjectProxy new handle: aCommand ]
+	[ ^ EDACMObjectProxy new handle: aCommand ]
 		on: Exception - Break
 		do:
-			[ :ex | self manageError: ex for: aCommand usingErrorStrategy: aStrategy ]
+			[ :ex | self manageError: ex for: aCommand usingErrorStrategy: aStrategy. ^ OrderedCollection empty ]
 ]

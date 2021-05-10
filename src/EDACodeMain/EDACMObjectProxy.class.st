@@ -41,7 +41,7 @@ EDACMObjectProxy >> edacmMethodsInClass: anObject [
 
 { #category : #accessing }
 EDACMObjectProxy >> handle: aCommand [
-	^ EDACMMethodCreated withBuilder: (EDABuilder with: aCommand)
+	^ OrderedCollection with: (EDACMMethodCreated withBuilder: (EDABuilder with: aCommand))
 ]
 
 { #category : #initialization }

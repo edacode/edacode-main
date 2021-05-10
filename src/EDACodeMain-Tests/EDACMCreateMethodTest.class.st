@@ -1,16 +1,16 @@
 Class {
 	#name : #EDACMCreateMethodTest,
 	#superclass : #BabyMock2TestCase,
-	#traits : 'EDATBDDHelper',
-	#classTraits : 'EDATBDDHelper classTrait',
+	#traits : 'EDATDomainBDD',
+	#classTraits : 'EDATDomainBDD classTrait',
 	#category : #'EDACodeMain-Tests'
 }
 
 { #category : #examples }
 EDACMCreateMethodTest >> createMethod_example [
-	| createMethod target code methodName |
+	| createMethod target code methodName methodCreated |
 	target := Object.
-	code := [ :command | Transcript print: 'code injected' ].
+	code := [ :command | ^ 'code injected' ].
 	methodName := #edacmRemoveMe.
 	createMethod := EDACMCreateMethod
 		withBuilder:
@@ -21,11 +21,14 @@ EDACMCreateMethodTest >> createMethod_example [
 						add: 'code' -> code;
 						add: 'methodName' -> methodName;
 						yourself)).
+	methodCreated := EDACMMethodCreated
+		withBuilder:
+			(EDABuilder
+				with:
+					createMethod).
 	^ EDAExample
 		when: (self serializeCommand: createMethod)
-		then: [ :events :eventStore | self
-				assertMethod: createMethod methodName
-				existsIn: createMethod target ]
+		then: (OrderedCollection with: methodCreated)
 ]
 
 { #category : #examples }
@@ -33,9 +36,8 @@ EDACMCreateMethodTest >> createMethod_test [
 	| example |
 	example := self createMethod_example.
 	self
-		whenReceiveCommand: example when
-		ofType: 'CREATE_METHOD'
-		then: example then
+		whenReceiveMessage: example when
+		thenEvents: example then
 ]
 
 { #category : #tests }
