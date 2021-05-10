@@ -20,12 +20,8 @@ BaselineOfEDACodeMain >> baseline: spec [
 { #category : #meta }
 BaselineOfEDACodeMain >> declareGroupsIn: spec [
 	spec
-		group: 'core'
-			with:
-			#(#'EDACodeMain');
-		group: 'tests'
-			with:
-			#(#'EDACodeMain-Tests');
+		group: 'core' with: #(#EDACodeMain #'EDACodeMain-Support');
+		group: 'tests' with: #(#'EDACodeMain-Tests');
 		group: 'default' with: #('core' 'tests')
 ]
 
@@ -33,6 +29,7 @@ BaselineOfEDACodeMain >> declareGroupsIn: spec [
 BaselineOfEDACodeMain >> declarePackagesIn: spec [
 	spec
 		package: #EDACodeMain with: [ spec requires: #('PharoEDA') ];
+		package: #'EDACodeMain-Support' with: [ spec requires: #('PharoEDA' 'EDACodeMain') ];
 		package: #'EDACodeMain-Tests'
 			with: [ spec requires: #('EDACodeMain') ]
 ]

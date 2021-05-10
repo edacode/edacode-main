@@ -1,6 +1,6 @@
 Class {
 	#name : #EDACMCreateMethod,
-	#superclass : #EDAUserCommand,
+	#superclass : #EDACMCommand,
 	#instVars : [
 		'target',
 		'code',
@@ -12,6 +12,11 @@ Class {
 { #category : #meta }
 EDACMCreateMethod class >> aggregateRootClass [
 	^ EDACMObjectProxy
+]
+
+{ #category : #'instance creation' }
+EDACMCreateMethod class >> commandName [
+	^ #CREATE_METHOD
 ]
 
 { #category : #accessing }
