@@ -14,9 +14,14 @@ EDACMCreateMethod class >> aggregateRootClass [
 	^ EDACMObjectProxy
 ]
 
-{ #category : #'instance creation' }
+{ #category : #accessing }
 EDACMCreateMethod class >> commandName [
 	^ #CREATE_METHOD
+]
+
+{ #category : #testing }
+EDACMCreateMethod class >> commandNameMatches: aString [
+	^ aString asSymbol = #CREATE_METHOD
 ]
 
 { #category : #accessing }
